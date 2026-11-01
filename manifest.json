@@ -1,0 +1,17 @@
+{
+  "name": "だれかな？ばあ！",
+  "short_name": "だれかなばあ",
+  "description": "くさむらを触ると動物が「ばあ！」と出てくる、小さい子向けの遊び画面",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "background_color": "#cfe6ea",
+  "theme_color": "#cfe6ea",
+  "orientation": "any",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

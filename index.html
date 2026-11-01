@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#cfe6ea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="だれかなばあ">
+  <title>だれかな？ばあ！</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 遊ぶ画面 -->
+  <div id="stage">
+    <img id="bg" src="img/bg.webp" alt="" draggable="false">
+    <img id="suke" src="img/suke_normal.webp" alt="" draggable="false">
+    <div id="sunset" class="tint"></div>
+    <div id="night" class="tint"></div>
+    <div id="sky"></div>
+  </div>
+
+  <!-- 大人用：右上を3秒長押しでメニュー -->
+  <div id="corner"><div class="ring"></div></div>
+
+  <!-- はじめの画面（大人が操作してから子どもに渡す） -->
+  <div id="start" class="panel-wrap">
+    <div class="panel">
+      <img class="logo" src="img/suke_happy.webp" alt="" draggable="false">
+      <h1>だれかな？ ばあ！</h1>
+      <button id="play" class="big">あそぶ</button>
+      <div class="settings"></div>
+      <button class="link howto-open">画面の固定のしかた（はじめに1回）</button>
+      <p class="note">大人のメニュー：右上のすみを3秒長押し</p>
+    </div>
+  </div>
+
+  <!-- 大人用メニュー -->
+  <div id="menu" class="panel-wrap hidden">
+    <div class="panel">
+      <h2>大人のメニュー</h2>
+      <div class="settings"></div>
+      <p id="remain" class="note"></p>
+      <button id="bye-now" class="wide">いま おしまいにする</button>
+      <button id="restart" class="wide">さいしょから あそぶ</button>
+      <button class="link howto-open">画面の固定のしかた</button>
+      <button id="menu-close" class="big">とじる</button>
+    </div>
+  </div>
+
+  <!-- 画面の固定のしかた -->
+  <div id="howto" class="panel-wrap hidden">
+    <div class="panel howto">
+      <h2>画面の固定のしかた</h2>
+      <p>アプリだけでは、ホームに戻る操作を止められません。スマホの機能で画面を固定してから渡してください。</p>
+      <h3>iPhone（アクセスガイド）</h3>
+      <ol>
+        <li>設定 → アクセシビリティ → アクセスガイド をオンにする（パスコードも設定）</li>
+        <li>このアプリを開いた状態で、サイドボタンを3回押す → 「開始」</li>
+        <li>終わるとき：サイドボタンを3回押してパスコード → 「終了」</li>
+      </ol>
+      <h3>Android（アプリ固定）</h3>
+      <ol>
+        <li>設定アプリで「アプリ固定」と検索してオンにする（「解除する前にPINを確認」もオン）</li>
+        <li>最近使ったアプリの画面で、このアプリのアイコンをタップ → 「固定」</li>
+        <li>終わるとき：画面の下から上にスワイプしたまま止める（ボタン操作なら「戻る」と「最近」を同時に長押し）</li>
+      </ol>
+      <p class="note">ホーム画面に追加してから開くと、全画面で遊べます。電波がなくても動きます。</p>
+      <button id="howto-close" class="big">とじる</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

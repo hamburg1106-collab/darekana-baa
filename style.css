@@ -1,0 +1,317 @@
+:root {
+  --cream: #faf3e2;
+  --brown: #5a3b26;
+  --orange: #e0773a;
+  --line: #e6d8bb;
+  --font: "Hiragino Maru Gothic ProN", "M PLUS Rounded 1c", "BIZ UDPGothic", "Meiryo", sans-serif;
+}
+
+/* 子どもが触っても、拡大・選択・スクロール・長押しメニューが出ないようにする */
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  position: fixed;
+  inset: 0;
+  background: #cfe6ea;
+  font-family: var(--font);
+  color: var(--brown);
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+#stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+#bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 80%;
+  pointer-events: none;
+}
+
+/* ---- くさむらと動物 ---- */
+.spot {
+  position: absolute;
+  pointer-events: none;
+}
+
+.spot .clip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.spot .animal {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  pointer-events: auto;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+.spot .bush {
+  position: absolute;
+  bottom: 0;
+  pointer-events: auto;
+  transform-origin: 50% 100%;
+  overflow: visible;
+}
+
+/* ---- すけまる ---- */
+#suke {
+  position: absolute;
+  z-index: 1000;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+/* ---- シャボン玉 ---- */
+.bubble {
+  position: absolute;
+  z-index: 1500;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.95) 0 9%, rgba(255, 255, 255, 0) 16%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12) 50%, rgba(150, 200, 255, 0.6) 70%, rgba(240, 160, 220, 0.85) 88%, rgba(255, 255, 255, 0.95) 100%);
+  border: 1.5px solid rgba(120, 160, 210, 0.55);
+  box-sizing: border-box;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* ---- 夕方・夜 ---- */
+.tint {
+  position: absolute;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+  opacity: 0;
+}
+
+#sunset {
+  background: linear-gradient(to bottom, rgba(255, 150, 90, 0.85), rgba(255, 190, 140, 0.45) 55%, rgba(255, 170, 120, 0.25));
+  mix-blend-mode: multiply;
+  transition: opacity 0.6s linear;
+}
+
+#night {
+  background: linear-gradient(to bottom, #141c45, #2c3470 60%, #3a3a6a);
+  transition: opacity 4s ease;
+}
+
+#sky {
+  position: absolute;
+  inset: 0;
+  z-index: 2100;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff8d6;
+  box-shadow: 0 0 6px 2px rgba(255, 245, 200, 0.7);
+  opacity: 0;
+}
+
+.moon {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #fffbe3, #fde9a6);
+  box-shadow: 0 0 30px 10px rgba(255, 240, 180, 0.35);
+  opacity: 0;
+  transition: opacity 4s ease;
+}
+
+/* ---- 大人用の長押し場所 ---- */
+#corner {
+  position: absolute;
+  top: env(safe-area-inset-top);
+  right: env(safe-area-inset-right);
+  width: 64px;
+  height: 64px;
+  z-index: 5000;
+}
+
+#corner .ring {
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  opacity: 0;
+  background: conic-gradient(rgba(255, 255, 255, 0.9) calc(var(--p, 0) * 1turn), rgba(255, 255, 255, 0.2) 0);
+  -webkit-mask: radial-gradient(circle, transparent 52%, #000 54%);
+  mask: radial-gradient(circle, transparent 52%, #000 54%);
+}
+
+#corner.pressing .ring {
+  opacity: 1;
+}
+
+/* ---- 大人向けの画面 ---- */
+.panel-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 6000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  background: rgba(60, 45, 30, 0.35);
+  touch-action: pan-y;
+}
+
+#start {
+  background: url("img/bg.webp") center 80% / cover;
+}
+
+.panel-wrap.hidden {
+  display: none;
+}
+
+.panel {
+  width: 100%;
+  max-width: 400px;
+  max-height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 24px;
+  background: var(--cream);
+  box-shadow: 0 8px 30px rgba(60, 40, 20, 0.25);
+  text-align: center;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+
+.panel .logo {
+  width: 120px;
+  height: auto;
+}
+
+h1 {
+  margin: 4px 0 16px;
+  font-size: 26px;
+}
+
+h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+}
+
+h3 {
+  margin: 16px 0 6px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.howto p,
+.howto ol {
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.howto ol {
+  padding-left: 1.4em;
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button.big {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+button.wide {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  font-size: 16px;
+}
+
+button.link {
+  display: block;
+  margin: 12px auto;
+  border: none;
+  background: none;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.note {
+  margin: 10px 0 0;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.settings {
+  margin: 16px 0 4px;
+  text-align: left;
+}
+
+.setting {
+  margin-bottom: 12px;
+}
+
+.setting .label {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.seg {
+  display: flex;
+  gap: 4px;
+}
+
+.seg button {
+  flex: 1;
+  padding: 8px 0;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  font-size: 15px;
+}
+
+.seg button.on {
+  border-color: var(--orange);
+  background: #fde6d6;
+  font-weight: bold;
+}
