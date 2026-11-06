@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 from PIL import Image
 
-SRC = Path(r"c:/作業スペース/draft/sukemaru-channel/design/gemini/cut")
+SRC = Path(r"c:/作業スペース/動画/すけまるチャンネル/design/gemini/cut")
 OUT = Path(r"c:/作業スペース/だれかなばあ/img")
 
 ANIMALS = {

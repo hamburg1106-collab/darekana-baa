@@ -10,7 +10,7 @@
 
 ## 絵
 
-`draft/sukemaru-channel/design/gemini/cut/` の切り絵を縮めたもの。作り直しは `tools/make_img.py`（切り詰め → 高さ440pxのwebp、アイコンも作る）。Pythonは `draft/sukemaru-channel/.venv` を使う。
+`動画/すけまるチャンネル/design/gemini/cut/` の切り絵を縮めたもの。作り直しは `tools/make_img.py`（切り詰め → 高さ440pxのwebp、アイコンも作る）。Pythonは `動画/すけまるチャンネル/.venv` を使う。
 
 ## 更新するとき
 
